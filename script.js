@@ -1,25 +1,40 @@
-function findMaxDistance(d) {
+function findMaxDistance(distances) {
     let maxDistance = arr[0];
-    for (const d_i of d)
-        if (maxDistance < d_i)
-            maxDistance = d_i;
+    for (let i = 0; i < distances.length; ++i)
+        if (maxDistance < distances[i])
+            maxDistance = distances[i];
     return maxDistance;
 }
 
-function filterLongRoutes(d) {
+function filterLongRoutes(distances) {
     const longRouteCriteria = 100;
+
     const longRoutes = [];
-    for (const d_i of d)
-        if (d_i > longRouteCriteria)
-            longRoutes.push(d_i);
+    for (let i = 0; i < distances.length; ++i)
+        if (distances[i] > longRouteCriteria)
+            longRoutes.push(distances[i]);
     return longRoutes;
 }
 
-function calculateTotalDistance(d) {
+function calculateTotalDistance(distances) {
     let totalDistance = 0;
-    for (const d_i of d)
-        totalDistance += d_i;
+    for (let i = 0; i < distances.length; ++i)
+        totalDistance += distances[i];
     return totalDistance;
+}
+
+// returns pair [count, totalDistance]
+function shortRoutesProcessing(distances) {
+    const shortRouteCriteria = 30;
+
+    let shortRoutesCount = 0;
+    let shortRoutesTotalDistance = 0;
+    for (let i = 0; i < distances.length; ++i)
+        if (distances[i] <= shortRouteCriteria) {
+            ++shortRoutesCount;
+            shortRoutesTotalDistance += distances[i];
+        }
+    return [shortRoutesCount, shortRoutesTotalDistance];
 }
 
 function main() {
@@ -40,8 +55,7 @@ function main() {
     const longRoutes = filterLongRoutes(distances);
     const longRoutesTotalDistance = calculateTotalDistance(longRoutes);
 
-    const shortRoutesCount = distances.length - longRoutes.length;
-    const shortRoutesTotalDistance = totalDistance - longRoutesTotalDistance;
+    const [shortRoutesCount, shortRoutesTotalDistance] = shortRoutesProcessing(distances);
 }
 
 main()
