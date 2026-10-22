@@ -1,5 +1,10 @@
+// criterias
+const longRouteCriteria = 100;
+const shortRouteCriteria = 30;
+const bigTotalDistanceCriteria = 500;
+
 function findMaxDistance(distances) {
-    let maxDistance = arr[0];
+    let maxDistance = distances[0];
     for (let i = 0; i < distances.length; ++i)
         if (maxDistance < distances[i])
             maxDistance = distances[i];
@@ -7,8 +12,6 @@ function findMaxDistance(distances) {
 }
 
 function filterLongRoutes(distances) {
-    const longRouteCriteria = 100;
-
     const longRoutes = [];
     for (let i = 0; i < distances.length; ++i)
         if (distances[i] > longRouteCriteria)
@@ -25,8 +28,6 @@ function calculateTotalDistance(distances) {
 
 // returns pair [count, totalDistance]
 function shortRoutesProcessing(distances) {
-    const shortRouteCriteria = 30;
-
     let shortRoutesCount = 0;
     let shortRoutesTotalDistance = 0;
     for (let i = 0; i < distances.length; ++i)
@@ -56,6 +57,21 @@ function main() {
     const longRoutesTotalDistance = calculateTotalDistance(longRoutes);
 
     const [shortRoutesCount, shortRoutesTotalDistance] = shortRoutesProcessing(distances);
+
+
+
+    alert(
+        "Здравствуйте, " + userName + "!\n" +
+        "Ваш маршрут длиной " + totalDistance + " км, " +
+        "из них " + longRoutesTotalDistance + " км - длинные перегоны."
+    );
+
+    console.log("Самый длинный перегон: " + maxDistance + " км.");
+    console.log("Количество коротких перегонов (<= " + shortRouteCriteria + " км): " + shortRoutesCount + '.');
+    console.log("Общая длина коротких перегонов: " + shortRoutesTotalDistance + " км.");
+
+    if (totalDistance > bigTotalDistanceCriteria)
+        console.log("Рекомендуется разбить маршрут на 2-3 дня.");
 }
 
 main()
