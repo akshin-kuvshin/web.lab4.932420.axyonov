@@ -66,7 +66,7 @@ function main() {
         "из них " + longRoutesTotalDistance + " км - длинные перегоны."
     );
 
-    console.log("Самый длинный перегон: " + maxDistance + " км.");
+    console.log("Самый длинный перегон: " + maxDistance + " км."); // wasn't in ToR
     console.log("Количество коротких перегонов (<= " + shortRouteCriteria + " км): " + shortRoutesCount + '.');
     console.log("Общая длина коротких перегонов: " + shortRoutesTotalDistance + " км.");
 
